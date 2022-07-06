@@ -1,0 +1,23 @@
+<h1>Olá visitante</h1>
+
+<div class="">
+    <form>
+        <label>E-mail, CPF ou PIS</label>
+        <br />
+        <input [(ngModel)]="login" name="login" value="" type="text" id="login">
+        <br />
+        <label>Senha</label>
+        <br />
+        <input [(ngModel)]="senha" name="senha" value="" type="password" id="senha">
+        <div style="margin-top:10px">
+            <button type="submit" (click)="onSubmit()">Entrar</button>
+            <button [routerLink]="['/cadastro']">Cadastro</button>
+        </div>
+    </form>
+</div>
+<div>
+    <form>
+        
+    </form>
+</div>
+
