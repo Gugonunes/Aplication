@@ -1,21 +1,83 @@
-<form>
-    <!-- <label>Nome</label><br />
-    <input [(ngModel)]="nome" name="nome" value="" type="text" id="login"><br />
-    <label>Email</label><br />
-    <input [(ngModel)]="email" name="email" value="" type="text" id="email"> -->
+<form [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
+    <label>
+        Nome
+        <input type="text" formControlName="nomeCompleto" value="a"><br />
+    </label>
+    <label>
+        Email
+        <input type="text" formControlName="email">
+    </label><br />
+    <div class="endereco">
+        <label>
+            País
+            <input type="text" formControlName="pais">
+        </label><br />
+        <label>
+            Estado
+            <select type="text" formControlName="pais">
+                <option>AC - Acre</option>
+                <option>AL - Alagoas</option>
+                <option>AP - Amapá</option>
+                <option>AM - Amazonas</option>
+                <option>BA - Bahia</option>
+                <option>CE - Ceará</option>
+                <option>DF - Distrito Federal</option>
+                <option>ES - Espírito Santo</option>
+                <option>GO - Goiás</option>
+                <option>MA - Maranhão</option>
+                <option>MT - Mato Grosso</option>
+                <option>MS - Mato Grosso do Sul</option>
+                <option>MG - Minas Gerais</option>
+                <option>PA - Pará</option>
+                <option>PB - Paraíba</option>
+                <option>PR - Paraná</option>
+                <option>PE - Pernambuco</option>
+                <option>PI - Piauí</option>
+                <option>RJ - Rio de Janeiro</option>
+                <option>RN - Rio Grande do Norte</option>
+                <option>RS - Rio Grande do Sul </option>
+                <option>RO - Rondônia</option>
+                <option>RR - Roraima</option>
+                <option>SC - Santa Catarina</option>
+                <option>SP - São Paulo</option>
+                <option>SE - Sergipe</option>
+                <option>TO - Tocantins</option>
+            </select>
+        </label><br />
+        <label>
+            Município
+            <input type="text" formControlName="pais">
+        </label><br />
+        <label>
+            CEP
+            <input type="text" formControlName="pais">
+        </label><br />
 
-    <!-- ○ nome
-○ email
-○ endereço do usuário
-■ País
-■ Estado
-■ Município
-■ CEP
-■ Rua
-■ Número
-■ Complemento
-○ CPF
-○ PIS
-○ Senha -->
+        <label>
+            Rua
+            <input type="text" formControlName="pais">
+        </label><br />
+        <label>
+            Numero
+            <input type="text" formControlName="pais">
+        </label><br />
+        <label>
+            Complemento
+            <input type="text" formControlName="pais">
+        </label><br />
+    </div>
+    <label>
+        CPF
+        <input type="text" formControlName="pais">
+    </label><br />
+    <label>
+        PIS
+        <input type="text" formControlName="pais">
+    </label><br />
+    <label>
+        Senha
+        <input type="password" formControlName="pais">
+    </label><br />
+    <button type="submit">Cadastrar</button>
 </form>
 <button  [routerLink]="['']">Login</button>
