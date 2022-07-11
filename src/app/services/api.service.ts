@@ -18,14 +18,9 @@ export class ApiService {
   }
 
   postTypeRequest(url: string, payload: any) {
-    return this.httpClient.post(this.REST_API_SERVER+url, payload).pipe(map(res => {
+    return this.httpClient.post(this.REST_API_SERVER+url+payload, payload).pipe(map(res => {
       return res;
     }));
   }
 
-  putTypeRequest(url: string, payload: any) {
-    return this.httpClient.put(this.REST_API_SERVER+url, payload).pipe(map(res => {
-      return res;
-    }))
-  }  
 }

@@ -10,7 +10,7 @@
         <br />
         <input [(ngModel)]="senha" name="senha" value="" type="password" id="senha">
         <div style="margin-top:10px">
-            <button type="submit" (click)="onSubmit()">Entrar</button>
+            <button type="submit" (click)="onSubmit(login)">Entrar</button>
             <button [routerLink]="['/cadastro']">Cadastro</button>
         </div>
     </form>

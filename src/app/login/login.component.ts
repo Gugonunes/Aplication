@@ -27,19 +27,19 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/cadastro']);
   }
 
-  async onSubmit(): Promise<any>{
-    let b = this.login;
+  async onSubmit(login:any): Promise<any>{
+    let b = login;
     console.log(b)
     await this._api.postTypeRequest('', b).subscribe((res: any) => {
-        console.log("testeeeee")
+        console.log(res);
+        debugger;
     }, err => {
       console.log(err)
     });
 
     if(this.login == "gugonunes@hotmail.com"){
-      //validarSenha
-      logado = true;
-      this.router.navigate(['home']);
+      // validarSenha
+      // logado = true;
     }
     else{
       alert("email incorreto");
