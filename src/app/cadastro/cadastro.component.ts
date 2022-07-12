@@ -51,7 +51,10 @@ export class CadastroComponent implements OnInit {
     }
   }
 
-  onSubmit(): void{
-    alert('Cadastro realizado com sucesso');
+  async onSubmit(data: any): Promise<void>{
+    await this._api.updateDados(data).subscribe((res: any) => {
+      console.log(data);
+    });
+    
   }
 }

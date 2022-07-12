@@ -1,7 +1,7 @@
-<form [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
+<form [formGroup]="formCadastro" (ngSubmit)="onSubmit(formCadastro)">
     <label>
         Nome
-        <input type="text" formControlName="NomeCompleto" value="a"><br />
+        <input type="text" formControlName="NomeCompleto" ><br />
     </label>
     <label>
         Email

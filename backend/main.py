@@ -1,4 +1,6 @@
+from array import array
 from typing import Optional
+from typing import List
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -60,6 +62,12 @@ def login(id):
     cursor.execute(sql)
     row = cursor.fetchone()
     return row
+
+@app.get("/update/{NomeCompleto}/{Senha}/{Email}/{Pais}/{Estado}/{Municipio}/{CEP}/{Rua}/{Numero}/{Complemento}/{CPF}/{PIS}")
+def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS):
+    print (NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS)
+
+    return 0
 
 
 
