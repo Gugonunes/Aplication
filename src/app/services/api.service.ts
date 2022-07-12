@@ -17,8 +17,13 @@ export class ApiService {
     }));
   }
 
-  postTypeRequest(url: string, payload: any) {
-    return this.httpClient.post(this.REST_API_SERVER+url+payload, payload).pipe(map(res => {
+  postTypeRequest(url: string, login: any, senha: any) {
+    return this.httpClient.post(this.REST_API_SERVER+url+login+"/"+senha, login).pipe(map(res => {
+      return res;
+    }));
+  }
+  getDados(id: any) {
+    return this.httpClient.get(this.REST_API_SERVER+id).pipe(map(res => {
       return res;
     }));
   }

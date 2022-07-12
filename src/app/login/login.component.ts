@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {ApiService} from '../services/api.service'
 
 export let logado = false; 
+export let id = '';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,29 +22,30 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     logado = false;
+    id = '';
   }
 
   gotoCadastro(){
     this.router.navigate(['/cadastro']);
   }
+  gotoHome(login:any){
+    id = login;
+    this.router.navigate(['/home']);
+  }
 
-  async onSubmit(login:any): Promise<any>{
-    let b = login;
-    console.log(b)
-    await this._api.postTypeRequest('', b).subscribe((res: any) => {
-        console.log(res);
-        debugger;
+  async onSubmit(login:any, senha:any): Promise<any>{
+    await this._api.postTypeRequest('', login, senha).subscribe((res: any) => {
+        if(res==-1){
+          alert("Senha inválida, tente novamente");
+        }
+        else if(res==0){
+          console.log("Senha correta");
+          logado = true;
+          this.gotoHome(login);
+        }
     }, err => {
       console.log(err)
     });
-
-    if(this.login == "gugonunes@hotmail.com"){
-      // validarSenha
-      // logado = true;
-    }
-    else{
-      alert("email incorreto");
-    }
   }
   
 }

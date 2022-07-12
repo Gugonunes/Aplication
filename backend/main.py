@@ -38,23 +38,28 @@ try:
 except Error as erro:
     print("Erro na conexão com o MySQL:", erro)
 
-
-class User(BaseModel):
-    username: str
-    password: str
     
-@app.post("/{payload}")
-def login(payload):
+@app.post("/{login}/{senha}")
+def login(login, senha):
     cursor = connection.cursor(buffered=True)
-    sql = "SELECT * FROM USUARIOS WHERE EMAIL = '" + payload + "'"
+    sql = "SELECT SENHA FROM USUARIOS WHERE EMAIL = '" + login + "' OR CPF = '" + login + "' OR PIS = '" + login + "'"
     cursor.execute(sql)
-    row = cursor.fetchall()
-    print(row[0])
-    return {row[0]}
+    row = cursor.fetchone()
+    if (row[0] == senha):
+        print("senha correta")
+        return 0
 
+    else:
+        print("senha invalida")
+        return -1
 
-@app.get("/")
-def login():
-    return {"teste login"}
+@app.get("/{id}")
+def login(id):
+    cursor = connection.cursor(buffered=True)
+    sql = "SELECT * FROM USUARIOS WHERE EMAIL = '" + id + "'"
+    cursor.execute(sql)
+    row = cursor.fetchone()
+    return row
+
 
 

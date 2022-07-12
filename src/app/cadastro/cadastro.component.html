@@ -1,20 +1,20 @@
 <form [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
     <label>
         Nome
-        <input type="text" formControlName="nomeCompleto" value="a"><br />
+        <input type="text" formControlName="NomeCompleto" value="a"><br />
     </label>
     <label>
         Email
-        <input type="text" formControlName="email">
+        <input type="text" formControlName="Email">
     </label><br />
     <div class="endereco">
         <label>
             País
-            <input type="text" formControlName="pais">
+            <input type="text" formControlName="Pais">
         </label><br />
         <label>
             Estado
-            <select type="text" formControlName="pais">
+            <select type="text" formControlName="Estado" >
                 <option>AC - Acre</option>
                 <option>AL - Alagoas</option>
                 <option>AP - Amapá</option>
@@ -46,37 +46,37 @@
         </label><br />
         <label>
             Município
-            <input type="text" formControlName="pais">
+            <input type="text" formControlName="Municipio">
         </label><br />
         <label>
             CEP
-            <input type="text" formControlName="pais">
+            <input type="text" formControlName="CEP">
         </label><br />
 
         <label>
             Rua
-            <input type="text" formControlName="pais">
+            <input type="text" formControlName="Rua">
         </label><br />
         <label>
             Numero
-            <input type="text" formControlName="pais">
+            <input type="text" formControlName="Numero">
         </label><br />
         <label>
             Complemento
-            <input type="text" formControlName="pais">
+            <input type="text" formControlName="Complemento">
         </label><br />
     </div>
     <label>
         CPF
-        <input type="text" formControlName="pais">
+        <input type="text" formControlName="CPF">
     </label><br />
     <label>
         PIS
-        <input type="text" formControlName="pais">
+        <input type="text" formControlName="PIS">
     </label><br />
     <label>
         Senha
-        <input type="password" formControlName="pais">
+        <input type="password" formControlName="Senha">
     </label><br />
     <button type="submit">Cadastrar</button>
     <button>Excluir usuário</button>

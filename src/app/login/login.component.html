@@ -1,23 +1,19 @@
 <h1>Olá visitante</h1>
 
 <div class="">
-    <form>
+    <form ngNativeValidate>
         <label>E-mail, CPF ou PIS</label>
         <br />
-        <input [(ngModel)]="login" name="login" value="" type="text" id="login">
+        <input required [(ngModel)]="login" name="login" value="" type="text" id="login">
         <br />
         <label>Senha</label>
         <br />
-        <input [(ngModel)]="senha" name="senha" value="" type="password" id="senha">
+        <input required [(ngModel)]="senha" name="senha" value="" type="password" id="senha">
         <div style="margin-top:10px">
-            <button type="submit" (click)="onSubmit(login)">Entrar</button>
+            <button [disabled]="!login || !senha" type="submit" (click)="onSubmit(login, senha)">Entrar</button>
             <button [routerLink]="['/cadastro']">Cadastro</button>
         </div>
     </form>
 </div>
-<div>
-    <form>
-        
-    </form>
-</div>
+
 

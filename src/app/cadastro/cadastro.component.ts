@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
-import { logado } from '../login/login.component';
+import { logado, id } from '../login/login.component';
+import {ApiService} from '../services/api.service'
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -10,25 +11,43 @@ import { logado } from '../login/login.component';
 export class CadastroComponent implements OnInit {
 
   formCadastro = new FormGroup({
-    nomeCompleto: new FormControl(''),
-    email: new FormControl(''),
-    pais: new FormControl(''),
-    estado: new FormControl(''),
-    municipio: new FormControl(''),
+    NomeCompleto: new FormControl(''),
+    Email: new FormControl(''),
+    Pais: new FormControl(''),
+    Estado: new FormControl(''),
+    Municipio: new FormControl(''),
     CEP: new FormControl(''),
     Rua: new FormControl(''),
     Numero: new FormControl(''),
     Complemento: new FormControl(''),
     CPF: new FormControl(''),
     PIS: new FormControl(''),
-    senha: new FormControl('')
+    Senha: new FormControl('')
   });
 
-  constructor() { }
+  constructor(private _api : ApiService,) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
     if(logado){
-      this.formCadastro.patchValue({nomeCompleto: 'gustavo'});
+      //this.formCadastro.patchValue({nomeCompleto: 'gustavo'});
+      await this._api.getDados(id).subscribe((res: any) => {
+        console.log(res);
+        this.formCadastro.patchValue({
+          NomeCompleto: res[0],
+          Senha:res[1],
+          Email:res[2],
+          Pais:res[3],
+          Estado:res[4],
+          Municipio:res[5],
+          CEP:res[6],
+          Rua:res[7],
+          Numero:res[8],
+          Complemento:res[9],
+          CPF:res[10],
+          PIS:res[11],
+        });
+          
+      });
     }
   }
 
