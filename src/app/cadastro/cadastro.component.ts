@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { logado, id } from '../login/login.component';
 import {ApiService} from '../services/api.service'
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -9,6 +10,8 @@ import {ApiService} from '../services/api.service'
 })
 
 export class CadastroComponent implements OnInit {
+
+  public islogado = logado;
 
   formCadastro = new FormGroup({
     NomeCompleto: new FormControl(''),
@@ -52,9 +55,19 @@ export class CadastroComponent implements OnInit {
   }
 
   async onSubmit(data: any): Promise<void>{
-    await this._api.updateDados(data).subscribe((res: any) => {
-      console.log(data);
-    });
-    
-  }
+      await this._api.updateDados(data, logado).subscribe((res: any) => {
+        if(res == -1){
+          alert("Email já existe, informe outro!");
+          document.getElementById('campoEmail')?.focus();
+        }
+        else if(res == -2){
+          alert("CPF já existe, informe outro!");
+          document.getElementById('campoCPF')?.focus();
+        }
+        else if(res == -3){
+          alert("PIS já existe, informe outro!");
+          document.getElementById('campoPIS')?.focus();
+        }
+      });
+    } 
 }

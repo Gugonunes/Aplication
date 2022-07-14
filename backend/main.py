@@ -1,4 +1,5 @@
 from array import array
+import email
 from typing import Optional
 from typing import List
 from fastapi import FastAPI, HTTPException, Depends, Request
@@ -63,11 +64,55 @@ def login(id):
     row = cursor.fetchone()
     return row
 
-@app.get("/update/{NomeCompleto}/{Senha}/{Email}/{Pais}/{Estado}/{Municipio}/{CEP}/{Rua}/{Numero}/{Complemento}/{CPF}/{PIS}")
-def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS):
-    print (NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS)
+@app.get("/update/{NomeCompleto}/{Senha}/{Email}/{Pais}/{Estado}/{Municipio}/{CEP}/{Rua}/{Numero}/{Complemento}/{CPF}/{PIS}/{logado}")
+def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS, logado):
+    if logado == True:
+        sqlAtual = "SELECT EMAIL FROM USUARIOS WHERE CPF = '" + CPF + "'"
+        cursor.execute(sqlAtual)
+        EmailAtual = cursor.fetchone()
+        print(EmailAtual[0])
 
-    return 0
+        if EmailAtual[0] != Email:
+            sqlUnico = "SELECT EXISTS ( SELECT EMAIL FROM USUARIOS WHERE EMAIL = '"+Email+"')"
+            cursor.execute(sqlUnico)
+            row = cursor.fetchone()
+        
+            if row[0] == 0:
+                print(row)
+                sqlUpdate = "UPDATE USUARIOS SET NOME = '" + NomeCompleto + "', SENHA = '" + Senha + "', EMAIL = '" + Email + "', PAIS = '" + Pais + "', ESTADO = '" + Estado + "', MUNICIPIO = '" + Municipio + "', CEP = '" + CEP + "', RUA = '" + Rua + "', NUMERO = '" + Numero + "', COMPLEMENTO = '" + Complemento + "'"
+                cursor.execute(sqlUpdate)
+                return 0
+            else:
+                print("email ja existe")
+                return -1
+        else:
+            print("safe")
+            sqlUpdate = "UPDATE USUARIOS SET NOME = '" + NomeCompleto + "', SENHA = '" + Senha + "', EMAIL = '" + Email + "', PAIS = '" + Pais + "', ESTADO = '" + Estado + "', MUNICIPIO = '" + Municipio + "', CEP = '" + CEP + "', RUA = '" + Rua + "', NUMERO = '" + Numero + "', COMPLEMENTO = '" + Complemento + "' WHERE CPF = '" + CPF + "'"
+            cursor.execute(sqlUpdate)
+            return 0       
+    else:
+        print("nao ta logado")
+        sqlUnico = "SELECT EXISTS ( SELECT EMAIL FROM USUARIOS WHERE EMAIL = '"+Email+"'), EXISTS ( SELECT CPF FROM USUARIOS WHERE CPF = '"+CPF+"'), EXISTS ( SELECT PIS FROM USUARIOS WHERE PIS = '"+PIS+"')"
+        cursor.execute(sqlUnico)
+        row = cursor.fetchone()
+        print(row)
+        if row[0] == 1:
+            print("Email já existe")
+            return -1
+        
+        elif row[1] == 1:
+            print("cpf já existe")
+            return -2
+
+        elif row[2] == 1:
+            print("pis já existe")
+            return -3
+
+        else:
+            print("deu boa")
+            sqlUpdate = "INSERT INTO USUARIOS VALUES('" + NomeCompleto + "', '" + Senha + "', '" + Email + "', '" + Pais + "', '" + Estado + "', '" + Municipio + "', '" + CEP + "', '" + Rua + "', '" + Numero + "', '" + Complemento + "', '" + CPF + "', '" + PIS + "')"
+            cursor.execute(sqlUpdate)
+            return 0
 
 
 
