@@ -28,6 +28,7 @@ export class ApiService {
     }));
   }
   updateDados(data: any, logado: boolean){
+    console.log(logado);
     let NomeCompleto = data.value.NomeCompleto;
     let Senha = data.value.Senha;
     let Email = data.value.Email;

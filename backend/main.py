@@ -25,10 +25,10 @@ app.add_middleware(
 #Conexão com banco
 try: 
     connection = mysql.connector.connect(
-        host="localhost",
-        database="AplicacaoDB",
-        user="root",
-        password="",
+        host="us-cdbr-east-06.cleardb.net",
+        database="heroku_948872016d5d23b",
+        user="bc612f02f2a92a",
+        password="80ced395",
     )
     if connection.is_connected():
         db_Info = connection.get_server_info()
@@ -66,7 +66,8 @@ def login(id):
 
 @app.get("/update/{NomeCompleto}/{Senha}/{Email}/{Pais}/{Estado}/{Municipio}/{CEP}/{Rua}/{Numero}/{Complemento}/{CPF}/{PIS}/{logado}")
 def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS, logado):
-    if logado == True:
+    print(logado)
+    if logado == 'true':
         sqlAtual = "SELECT EMAIL FROM USUARIOS WHERE CPF = '" + CPF + "'"
         cursor.execute(sqlAtual)
         EmailAtual = cursor.fetchone()
