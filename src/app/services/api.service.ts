@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export class ApiService {
 
 
-  private REST_API_SERVER = "https://mysqlaplication.herokuapp.com/";
+  private REST_API_SERVER = process.env['PORT'];
   constructor(private httpClient: HttpClient) { }
 
   getTypeRequest(url: string) {
