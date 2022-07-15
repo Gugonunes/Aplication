@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export class ApiService {
 
 
-  private REST_API_SERVER = '';
+  private REST_API_SERVER = 'localhost:8000';
   constructor(private httpClient: HttpClient) { }
 
   getTypeRequest(url: string) {
