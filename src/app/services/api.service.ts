@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export class ApiService {
 
 
-  private REST_API_SERVER = 'http://localhost:8000/';
+  private REST_API_SERVER = "http://localhost:8000/";
   constructor(private httpClient: HttpClient) { }
 
   getTypeRequest(url: string) {
@@ -28,7 +28,6 @@ export class ApiService {
     }));
   }
   updateDados(data: any, logado: boolean){
-    console.log(logado);
     let NomeCompleto = data.value.NomeCompleto;
     let Senha = data.value.Senha;
     let Email = data.value.Email;
@@ -43,6 +42,18 @@ export class ApiService {
     let PIS = data.value.PIS;
     let dados = NomeCompleto+"/"+Senha+"/"+Email+"/"+Pais+"/"+Estado+"/"+Municipio+"/"+CEP+"/"+Rua+"/"+Numero+"/"+Complemento+"/"+CPF+"/"+PIS+"/"+logado
     return this.httpClient.get(this.REST_API_SERVER+"update/"+dados).pipe(map(res => {
+      return res;
+    }));
+  }
+  deleteUsuario(data: any, logado: boolean){
+    console.log("bbb");
+    return this.httpClient.get(this.REST_API_SERVER+"delete/" + data + "/" + logado).pipe(map(res => {
+      console.log(res);
+      return res;
+    }));
+  }
+  getNome(id:any){
+    return this.httpClient.get(this.REST_API_SERVER+"nome/"+id).pipe(map(res => {
       return res;
     }));
   }

@@ -68,7 +68,7 @@
     </div>
     <label>
         CPF
-        <input required [readonly]="islogado" type="text" formControlName="CPF" id="campoCPF">
+        <input required [(ngModel)]="CPF"  [readonly]="islogado" type="text" formControlName="CPF" id="campoCPF">
     </label><br />
     <label>
         PIS
@@ -79,6 +79,6 @@
         <input required type="password" formControlName="Senha">
     </label><br />
     <button type="submit">Cadastrar</button>
-    <button>Excluir usuário</button>
 </form>
-<button  [routerLink]="['']">Login</button>
+<button [disabled]="!islogado" (click)="onDelete(CPF, islogado)">Excluir usuário</button>
+<button [routerLink]="['']">Login</button>

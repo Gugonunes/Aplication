@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { logado } from '../login/login.component';
+import { logado, id } from '../login/login.component';
 import { Router } from '@angular/router';
+import {ApiService} from '../services/api.service'
 
 @Component({
   selector: 'app-home',
@@ -10,11 +11,16 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   public Usuario: String;
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private _api : ApiService,
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
     if(logado == true){
-      this.Usuario = 'Gustavo';
+      await this._api.getNome(id).subscribe((res: any) => {
+        this.Usuario = res;
+    });
     }
     else{
       this.router.navigate(['']);

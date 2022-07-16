@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { logado, id } from '../login/login.component';
 import {ApiService} from '../services/api.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,6 +13,7 @@ import {ApiService} from '../services/api.service'
 export class CadastroComponent implements OnInit {
 
   public islogado = logado;
+  public CPF: String;
 
   formCadastro = new FormGroup({
     NomeCompleto: new FormControl(''),
@@ -28,13 +30,14 @@ export class CadastroComponent implements OnInit {
     Senha: new FormControl('')
   });
 
-  constructor(private _api : ApiService,) { }
+  constructor(
+    private router: Router,
+    private _api : ApiService,
+  ) { }
 
   async ngOnInit(): Promise<any> {
     if(logado){
-      //this.formCadastro.patchValue({nomeCompleto: 'gustavo'});
       await this._api.getDados(id).subscribe((res: any) => {
-        console.log(res);
         this.formCadastro.patchValue({
           NomeCompleto: res[0],
           Senha:res[1],
@@ -49,7 +52,6 @@ export class CadastroComponent implements OnInit {
           CPF:res[10],
           PIS:res[11],
         });
-          
       });
     }
   }
@@ -68,6 +70,20 @@ export class CadastroComponent implements OnInit {
           alert("PIS já existe, informe outro!");
           document.getElementById('campoPIS')?.focus();
         }
+        else if(res == 1){
+          this.islogado = true;
+        }
       });
     } 
+
+  async onDelete(CPF: any, logado : any){
+    await this._api.deleteUsuario(CPF, logado).subscribe((res: any) => {
+        if(res==0){
+          this.islogado = false;
+          alert("Usuário excluido com sucesso");
+          this.router.navigate([""]);
+        }
+    });
+    console.log(CPF);
+  }
 }

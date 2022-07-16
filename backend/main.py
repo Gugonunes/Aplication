@@ -25,10 +25,10 @@ app.add_middleware(
 #Conexão com banco
 try: 
     connection = mysql.connector.connect(
-        host="us-cdbr-east-06.cleardb.net",
-        database="heroku_948872016d5d23b",
-        user="bc612f02f2a92a",
-        password="80ced395",
+        host="",
+        database="aplicacaodb",
+        user="root",
+        password="",
     )
     if connection.is_connected():
         db_Info = connection.get_server_info()
@@ -41,14 +41,21 @@ try:
 except Error as erro:
     print("Erro na conexão com o MySQL:", erro)
 
-    
+
+@app.get("/")
+def read_root():
+    return {"Olá": ", página de backend"}
+
 @app.post("/{login}/{senha}")
 def login(login, senha):
     cursor = connection.cursor(buffered=True)
     sql = "SELECT SENHA FROM USUARIOS WHERE EMAIL = '" + login + "' OR CPF = '" + login + "' OR PIS = '" + login + "'"
     cursor.execute(sql)
     row = cursor.fetchone()
-    if (row[0] == senha):
+    if (row == None):
+        return -2
+
+    elif (row[0] == senha):
         print("senha correta")
         return 0
 
@@ -113,7 +120,24 @@ def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero
             print("deu boa")
             sqlUpdate = "INSERT INTO USUARIOS VALUES('" + NomeCompleto + "', '" + Senha + "', '" + Email + "', '" + Pais + "', '" + Estado + "', '" + Municipio + "', '" + CEP + "', '" + Rua + "', '" + Numero + "', '" + Complemento + "', '" + CPF + "', '" + PIS + "')"
             cursor.execute(sqlUpdate)
-            return 0
+            return 1
+    
+@app.get("/delete/{data}/{logado}")
+def delete(data, logado):
+    print("entrou aq")
+    if logado == 'true':
+        print("e aqui")
+        sql = "DELETE FROM USUARIOS WHERE CPF = '" + data +"'"
+        cursor.execute(sql)
+        return 0
 
+@app.get("/nome/{id}")
+def getNome(id):
+    print('entrou aq agora nome')
+    sql="SELECT NOME FROM USUARIOS WHERE EMAIL = '"+id+"' OR CPF = '"+id+"' OR PIS = '"+id+"'"
+    cursor.execute(sql)
+    row = cursor.fetchone()
+    print(row)
+    return row
 
 

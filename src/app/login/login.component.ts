@@ -43,6 +43,9 @@ export class LoginComponent implements OnInit {
           logado = true;
           this.gotoHome(login);
         }
+        else if(res==-2){
+          alert("Usuário ou senha invalidos");
+        }
     }, err => {
       console.log(err)
     });
