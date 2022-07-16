@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { logado, id } from '../login/login.component';
 import {ApiService} from '../services/api.service'
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-cadastro',
@@ -59,19 +60,29 @@ export class CadastroComponent implements OnInit {
   async onSubmit(data: any): Promise<void>{
       await this._api.updateDados(data, logado).subscribe((res: any) => {
         if(res == -1){
-          alert("Email já existe, informe outro!");
-          document.getElementById('campoEmail')?.focus();
+          swal("Email já existe, informe outro!").then((value) => {
+            document.getElementById('campoEmail')?.focus();
+          });
         }
         else if(res == -2){
-          alert("CPF já existe, informe outro!");
-          document.getElementById('campoCPF')?.focus();
+          swal("CPF já existe, informe outro!").then((value) => {
+            document.getElementById('campoCPF')?.focus();
+          });
         }
         else if(res == -3){
-          alert("PIS já existe, informe outro!");
-          document.getElementById('campoPIS')?.focus();
+          swal("PIS já existe, informe outro!").then((value) => {
+            document.getElementById('campoPIS')?.focus();
+          });
         }
         else if(res == 1){
-          this.islogado = true;
+          swal("Usuário criado com sucesso, realize o login").then((value) => {
+            this.router.navigate(["/"]);
+          });
+        }
+        else if(res == 0){
+          swal("Dados atualizados com sucesso").then((value) => {
+            this.router.navigate(["/home"]);
+          });
         }
       });
     } 
@@ -80,10 +91,10 @@ export class CadastroComponent implements OnInit {
     await this._api.deleteUsuario(CPF, logado).subscribe((res: any) => {
         if(res==0){
           this.islogado = false;
-          alert("Usuário excluido com sucesso");
-          this.router.navigate([""]);
+          swal("Usuário excluido com sucesso").then((value) => {
+            this.router.navigate([""]);
+          });
         }
     });
-    console.log(CPF);
   }
 }

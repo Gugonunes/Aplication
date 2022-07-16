@@ -1,84 +1,89 @@
-<form [formGroup]="formCadastro" (ngSubmit)="onSubmit(formCadastro)" ngNativeValidate>
-    <label>
-        Nome
-        <input required type="text" formControlName="NomeCompleto" ><br />
-    </label>
-    <label>
-        Email
-        <input required type="email" formControlName="Email" id="campoEmail">
-    </label><br />
-    <div class="endereco">
+<div class="background cadastro" >
+   <form [formGroup]="formCadastro" (ngSubmit)="onSubmit(formCadastro)" ngNativeValidate>
         <label>
-            País
-            <input required type="text" formControlName="Pais">
-        </label><br />
+            Nome
+            <input required type="text" formControlName="NomeCompleto" ><br />
+        </label>
         <label>
-            Estado
-            <select required type="text" formControlName="Estado" >
-                <option>AC - Acre</option>
-                <option>AL - Alagoas</option>
-                <option>AP - Amapá</option>
-                <option>AM - Amazonas</option>
-                <option>BA - Bahia</option>
-                <option>CE - Ceará</option>
-                <option>DF - Distrito Federal</option>
-                <option>ES - Espírito Santo</option>
-                <option>GO - Goiás</option>
-                <option>MA - Maranhão</option>
-                <option>MT - Mato Grosso</option>
-                <option>MS - Mato Grosso do Sul</option>
-                <option>MG - Minas Gerais</option>
-                <option>PA - Pará</option>
-                <option>PB - Paraíba</option>
-                <option>PR - Paraná</option>
-                <option>PE - Pernambuco</option>
-                <option>PI - Piauí</option>
-                <option>RJ - Rio de Janeiro</option>
-                <option>RN - Rio Grande do Norte</option>
-                <option>RS - Rio Grande do Sul </option>
-                <option>RO - Rondônia</option>
-                <option>RR - Roraima</option>
-                <option>SC - Santa Catarina</option>
-                <option>SP - São Paulo</option>
-                <option>SE - Sergipe</option>
-                <option>TO - Tocantins</option>
-            </select>
+            Email
+            <input required type="email" formControlName="Email" id="campoEmail">
         </label><br />
-        <label>
-            Município
-            <input required type="text" formControlName="Municipio">
-        </label><br />
-        <label>
-            CEP
-            <input required type="text" formControlName="CEP">
-        </label><br />
+        <div class="endereco">
+            <label>
+                País
+                <input required type="text" formControlName="Pais">
+            </label><br />
+            <label id="estado">
+                Estado
+                <select required type="text" formControlName="Estado" >
+                    <option>AC - Acre</option>
+                    <option>AL - Alagoas</option>
+                    <option>AP - Amapá</option>
+                    <option>AM - Amazonas</option>
+                    <option>BA - Bahia</option>
+                    <option>CE - Ceará</option>
+                    <option>DF - Distrito Federal</option>
+                    <option>ES - Espírito Santo</option>
+                    <option>GO - Goiás</option>
+                    <option>MA - Maranhão</option>
+                    <option>MT - Mato Grosso</option>
+                    <option>MS - Mato Grosso do Sul</option>
+                    <option>MG - Minas Gerais</option>
+                    <option>PA - Pará</option>
+                    <option>PB - Paraíba</option>
+                    <option>PR - Paraná</option>
+                    <option>PE - Pernambuco</option>
+                    <option>PI - Piauí</option>
+                    <option>RJ - Rio de Janeiro</option>
+                    <option>RN - Rio Grande do Norte</option>
+                    <option>RS - Rio Grande do Sul </option>
+                    <option>RO - Rondônia</option>
+                    <option>RR - Roraima</option>
+                    <option>SC - Santa Catarina</option>
+                    <option>SP - São Paulo</option>
+                    <option>SE - Sergipe</option>
+                    <option>TO - Tocantins</option>
+                </select>
+            </label><br />
+            <label>
+                Município
+                <input required type="text" formControlName="Municipio">
+            </label><br />
+            <label>
+                CEP
+                <input required type="text" formControlName="CEP">
+            </label><br />
 
+            <label>
+                Rua
+                <input required type="text" formControlName="Rua">
+            </label><br />
+            <label>
+                Numero
+                <input required type="number" formControlName="Numero">
+            </label><br />
+            <label>
+                Complemento
+                <input required type="text" formControlName="Complemento">
+            </label><br />
+        </div>
         <label>
-            Rua
-            <input required type="text" formControlName="Rua">
+            CPF
+            <input required [(ngModel)]="CPF"  [readonly]="islogado" type="text" formControlName="CPF" id="campoCPF">
         </label><br />
         <label>
-            Numero
-            <input required type="number" formControlName="Numero">
+            PIS
+            <input required [readonly]="islogado" type="text" formControlName="PIS" id="campoPIS">
         </label><br />
         <label>
-            Complemento
-            <input required type="text" formControlName="Complemento">
+            Senha
+            <input required type="password" formControlName="Senha">
         </label><br />
+        <button *ngIf="!islogado" type="submit">Cadastrar</button>
+        <button *ngIf="islogado" type="submit">Atualizar dados</button>
+    </form>
+    <div class="boxBotoes">
+        <button [disabled]="!islogado" (click)="onDelete(CPF, islogado)">Excluir usuário</button>
+        <button [routerLink]="['']">Login</button>
     </div>
-    <label>
-        CPF
-        <input required [(ngModel)]="CPF"  [readonly]="islogado" type="text" formControlName="CPF" id="campoCPF">
-    </label><br />
-    <label>
-        PIS
-        <input required [readonly]="islogado" type="text" formControlName="PIS" id="campoPIS">
-    </label><br />
-    <label>
-        Senha
-        <input required type="password" formControlName="Senha">
-    </label><br />
-    <button type="submit">Cadastrar</button>
-</form>
-<button [disabled]="!islogado" (click)="onDelete(CPF, islogado)">Excluir usuário</button>
-<button [routerLink]="['']">Login</button>
+</div>

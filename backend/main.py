@@ -64,9 +64,9 @@ def login(login, senha):
         return -1
 
 @app.get("/{id}")
-def login(id):
+def dados(id):
     cursor = connection.cursor(buffered=True)
-    sql = "SELECT * FROM USUARIOS WHERE EMAIL = '" + id + "'"
+    sql = "SELECT * FROM USUARIOS WHERE EMAIL = '" + id + "' OR CPF = '" + id + "' OR PIS = '" + id + "'"
     cursor.execute(sql)
     row = cursor.fetchone()
     return row
@@ -74,10 +74,13 @@ def login(id):
 @app.get("/update/{NomeCompleto}/{Senha}/{Email}/{Pais}/{Estado}/{Municipio}/{CEP}/{Rua}/{Numero}/{Complemento}/{CPF}/{PIS}/{logado}")
 def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero, Complemento, CPF, PIS, logado):
     print(logado)
+    print("estou na update")
     if logado == 'true':
         sqlAtual = "SELECT EMAIL FROM USUARIOS WHERE CPF = '" + CPF + "'"
         cursor.execute(sqlAtual)
         EmailAtual = cursor.fetchone()
+        print(CPF)
+        print(Email)
         print(EmailAtual[0])
 
         if EmailAtual[0] != Email:
@@ -87,7 +90,7 @@ def update(NomeCompleto, Senha, Email, Pais, Estado, Municipio, CEP, Rua, Numero
         
             if row[0] == 0:
                 print(row)
-                sqlUpdate = "UPDATE USUARIOS SET NOME = '" + NomeCompleto + "', SENHA = '" + Senha + "', EMAIL = '" + Email + "', PAIS = '" + Pais + "', ESTADO = '" + Estado + "', MUNICIPIO = '" + Municipio + "', CEP = '" + CEP + "', RUA = '" + Rua + "', NUMERO = '" + Numero + "', COMPLEMENTO = '" + Complemento + "'"
+                sqlUpdate = "UPDATE USUARIOS SET NOME = '" + NomeCompleto + "', SENHA = '" + Senha + "', EMAIL = '" + Email + "', PAIS = '" + Pais + "', ESTADO = '" + Estado + "', MUNICIPIO = '" + Municipio + "', CEP = '" + CEP + "', RUA = '" + Rua + "', NUMERO = '" + Numero + "', COMPLEMENTO = '" + Complemento + "' WHERE CPF = '" + CPF + "'"
                 cursor.execute(sqlUpdate)
                 return 0
             else:

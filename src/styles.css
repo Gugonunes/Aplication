@@ -1,6 +1,164 @@
 /* You can add global styles to this file, and also import other style files */
-label{
+label, h1, h2, h3, h4{
     font-size:16px;
     font-family: Rubik,sans-serif;
     font-weight:600;
+    color:#58595b
+}
+p{
+    font-size:14px;
+    font-family: Rubik,sans-serif;
+    font-weight:600;
+    color:#58595b;
+}
+body{
+    background-color:#2c3e50;
+}
+.boxGeral{
+    max-width: 1200px;
+    margin:0 auto;
+    min-height:600px;
+    padding-top:150px;
+}
+.boxGeralHome{
+    max-width: 500px;
+    margin:0 auto;
+    min-height:600px;
+    padding-top:150px;
+}
+.background{
+    max-width:350px;
+    background-color:#ffffff;
+    padding:20px;
+    padding-bottom:35px;
+    border-radius:20px;
+    text-align: center;
+    float:right;
+    display:block;
+    width:100%;
+    margin-right:30px;
+    margin-top:30px;
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.45); 
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.45);
+}
+.background h2{
+    font-size:28px;
+    color:#58595b;
+}
+.contentLogin{
+    margin:0 auto;
+    max-width:240px;
+    text-align: left;
+}
+input{
+    background-color: #ffffff;
+    border: 1px solid #58595b;
+    border-radius:20px;
+    min-height: 30px;
+    width:100%;
+    box-sizing: border-box;
+    padding-left:10px;
+    font-family: Rubik,sans-serif;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+button{
+    background-color: #9900ff;
+    padding:10px;
+    border-radius:20px;
+    color:rgb(255, 255, 255);
+    font-weight: 600;
+    font-family: Rubik,sans-serif;
+    font-size: 16px;
+    border:0px;
+    cursor:pointer;
+    margin-bottom:10px;
+}
+button:disabled{
+    background-color:#9900ff59;
+    color:#ffffff;
+    cursor:default;
+    border:0px;
+}
+button:disabled:hover{
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.45); 
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.45);
+}
+button:hover{
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.45); 
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.45);
+    transition-duration: 0.2s;
+}
+
+.boxBemVindo{
+    display:block;
+    max-width:520px;
+    float:left;
+    font-size:46px;
+    padding:20px;
+    margin-top:30px;
+    margin-left:30px;
+    border-radius:20px;
+    background-image: url("./assets/pontotel-removebg-preview.png");
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    background-size: 130px 130px;
+}
+.boxBemVindo h2{
+    font-size: 80px;
+    font-weight: 800;
+    color:#ffffff;
+    line-height: 20px;
+}
+.boxBemVindo h3, h4{
+    color:#ffffff;
+    font-size:40px;
+    margin:0px;
+}
+.boxBemVindo h4{
+    font-size:28px;
+    color:#ffffff;
+}
+
+/*MOBILE*/
+@media screen and (max-width:1026px){
+    .boxGeral{
+        padding-top: 50px;
+    }
+    .boxBemVindo{
+        margin:0 auto;
+        float:none;
+        text-align: center;
+        background-position: 50% 75%;
+    }
+    .boxBemVindo h2{
+        padding-bottom: 100px;
+    }
+    .background{
+        float:none;
+        margin:0 auto;
+        margin-bottom:30px;
+    }
+}
+@media screen and (max-width:435px){
+    .boxBemVindo h2{
+        font-size:50px;
+    }
+    .boxBemVindo{
+        background-position: 50% 65%;
+    }
+    .boxBemVindo h3, .boxBemVindo h4{
+        font-size: 24px;
+    }
+    .background{
+        max-width:270px;
+        padding:10px;
+    }
+}
+@media screen and (max-width:360px){
+    .cadastro{
+        margin-top:30px;
+        max-width:260px!important;
+    }
 }

@@ -1,0 +1,8 @@
+.boxBotoes{
+    max-width:300px;
+    margin:0 auto;
+    display:block;
+}
+.boxBotoes button{
+    width:100%;
+}

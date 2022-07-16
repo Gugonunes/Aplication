@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {ApiService} from '../services/api.service'
+import swal from 'sweetalert';
 
 export let logado = false; 
 export let id = '';
@@ -36,15 +37,18 @@ export class LoginComponent implements OnInit {
   async onSubmit(login:any, senha:any): Promise<any>{
     await this._api.postTypeRequest('', login, senha).subscribe((res: any) => {
         if(res==-1){
-          alert("Senha inválida, tente novamente");
+          swal("Senha inválida, tente novamente").then((value) => {
+            document.getElementById('senha')?.focus();
+          });
         }
         else if(res==0){
-          console.log("Senha correta");
           logado = true;
           this.gotoHome(login);
         }
         else if(res==-2){
-          alert("Usuário ou senha invalidos");
+          swal("Usuário ou senha invalidos, tente novamente").then((value) => {
+            document.getElementById('login')?.focus();
+          });
         }
     }, err => {
       console.log(err)

@@ -46,9 +46,7 @@ export class ApiService {
     }));
   }
   deleteUsuario(data: any, logado: boolean){
-    console.log("bbb");
     return this.httpClient.get(this.REST_API_SERVER+"delete/" + data + "/" + logado).pipe(map(res => {
-      console.log(res);
       return res;
     }));
   }

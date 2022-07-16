@@ -1,0 +1,23 @@
+.boxBotoes{
+    max-width:400px;
+    margin:0 auto;
+}
+.boxBotoes button{
+    margin-right:10px;
+    margin-left:0px;
+}
+.cadastro{
+    text-align: left;
+    max-width:300px;
+}
+.cadastro label{
+    padding:5px;
+}
+#estado{
+    display: block;
+}
+#estado select{
+    border-radius: 20px;
+    min-height: 30px;
+    padding:5px;
+}
