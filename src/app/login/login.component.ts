@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     private _api : ApiService,
   ) { }
 
+  //ao entrar na pagina de login, todos os usuarios sao deslogados automaticamente
   ngOnInit(): void {
     logado = false;
     id = '';
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
     id = login;
     this.router.navigate(['/home']);
   }
-
+  //função de onsubmit, que envia os dados do login e senha para a api, para realizar a verificação do login no banco
   async onSubmit(login:any, senha:any): Promise<any>{
     await this._api.postTypeRequest('', login, senha).subscribe((res: any) => {
         if(res==-1){
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
             document.getElementById('senha')?.focus();
           });
         }
+        //se estiver tudo certo, usuario é logado e enviado para a home
         else if(res==0){
           logado = true;
           this.gotoHome(login);

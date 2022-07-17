@@ -12,10 +12,10 @@ import swal from 'sweetalert';
 })
 
 export class CadastroComponent implements OnInit {
-
+  //iniciando valores utilizados nas funções
   public islogado = logado;
   public CPF: String;
-
+  //criando o formulario
   formCadastro = new FormGroup({
     NomeCompleto: new FormControl(''),
     Email: new FormControl(''),
@@ -36,8 +36,10 @@ export class CadastroComponent implements OnInit {
     private _api : ApiService,
   ) { }
 
+  //inicio da funçao da página de cadastro
   async ngOnInit(): Promise<any> {
     if(logado){
+      //faz a chamada da api com a função getdados, a resposta informa todos os dados do usuario, se nao estiver logado a função nao é realizada
       await this._api.getDados(id).subscribe((res: any) => {
         this.formCadastro.patchValue({
           NomeCompleto: res[0],
@@ -56,8 +58,9 @@ export class CadastroComponent implements OnInit {
       });
     }
   }
-
+  //função de submit
   async onSubmit(data: any): Promise<void>{
+      //é chamada a função de atualizar dados, passando também como parametro a informação se o usuario esta logado 
       await this._api.updateDados(data, logado).subscribe((res: any) => {
         if(res == -1){
           swal("Email já existe, informe outro!").then((value) => {
@@ -86,7 +89,7 @@ export class CadastroComponent implements OnInit {
         }
       });
     } 
-
+  //função para deletar o usuario
   async onDelete(CPF: any, logado : any){
     await this._api.deleteUsuario(CPF, logado).subscribe((res: any) => {
         if(res==0){

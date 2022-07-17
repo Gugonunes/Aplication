@@ -10,23 +10,25 @@ export class ApiService {
 
   private REST_API_SERVER = "http://localhost:8000/";
   constructor(private httpClient: HttpClient) { }
-
+  //função base de teste do backend
   getTypeRequest(url: string) {
     return this.httpClient.get(this.REST_API_SERVER+url).pipe(map(res => {
       return res;
     }));
   }
-
+  //função do login
   postTypeRequest(url: string, login: any, senha: any) {
     return this.httpClient.post(this.REST_API_SERVER+url+login+"/"+senha, login).pipe(map(res => {
       return res;
     }));
   }
+  //função que retona os dados do usuario
   getDados(id: any) {
     return this.httpClient.get(this.REST_API_SERVER+id).pipe(map(res => {
       return res;
     }));
   }
+  //função que chama a atualização ou cadastro de novo usuário
   updateDados(data: any, logado: boolean){
     let NomeCompleto = data.value.NomeCompleto;
     let Senha = data.value.Senha;
@@ -45,11 +47,13 @@ export class ApiService {
       return res;
     }));
   }
+  //função de deletar usuario
   deleteUsuario(data: any, logado: boolean){
     return this.httpClient.get(this.REST_API_SERVER+"delete/" + data + "/" + logado).pipe(map(res => {
       return res;
     }));
   }
+  //função que retorna o nome do usuario na pagina home
   getNome(id:any){
     return this.httpClient.get(this.REST_API_SERVER+"nome/"+id).pipe(map(res => {
       return res;

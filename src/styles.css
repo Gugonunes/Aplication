@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* css global do site*/
 label, h1, h2, h3, h4{
     font-size:16px;
     font-family: Rubik,sans-serif;
@@ -121,7 +121,7 @@ button:hover{
     color:#ffffff;
 }
 
-/*MOBILE*/
+/*css mobile para responsividade*/
 @media screen and (max-width:1026px){
     .boxGeral{
         padding-top: 50px;
